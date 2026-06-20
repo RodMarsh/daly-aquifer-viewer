@@ -2,7 +2,7 @@
 
 Interactive 3D web viewer of the Cambrian Limestone Aquifer system underlying the Katherine Water Allocation Plan area in the Northern Territory, Australia.
 
-Live: <https://daly-aquifer.marsh.eco>
+Live: <https://daly-aquifer-viewer.marsh.eco>
 
 ## What it shows
 
