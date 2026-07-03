@@ -69,8 +69,8 @@
   </div>
   <div class="group">
     <h3>Basemap</h3>
-    <label><input type="radio" name="basemap" value="none"> None</label>
-    <label><input type="radio" name="basemap" value="osm" checked> OpenStreetMap</label>
+    <label><input type="radio" name="basemap" value="none" checked> None</label>
+    <label><input type="radio" name="basemap" value="osm"> OpenStreetMap</label>
     <label><input type="radio" name="basemap" value="topo"> Topographic (OpenTopoMap)</label>
   </div>
   <div class="group">
@@ -452,7 +452,7 @@ async function main() {
   const diag = Math.sqrt(w*w + h*h);
   controls.target.set(0, 0, 0);
 
-  // Initial basemap (default = OSM) determines initial camera angle:
+  // Initial basemap (default = none) determines initial camera angle:
   //  basemap on  -> flat top-down map view
   //  basemap off -> oblique view so the 3D Tindall depth is visible
   const initial = document.querySelector('input[name=basemap]:checked').value;
