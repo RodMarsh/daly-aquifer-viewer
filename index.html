@@ -6,7 +6,7 @@
 <style>
   html, body { margin: 0; height: 100%; background: #0b1820; color: #e8eef2; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; }
   #canvas-wrap { position: absolute; inset: 0; }
-  #ui { position: absolute; top: 12px; right: 12px; background: rgba(20,32,40,0.92); padding: 10px 14px; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.5); min-width: 240px; font-size: 13px; line-height: 1.5; }
+  #ui { position: absolute; top: 12px; right: 12px; background: rgba(20,32,40,0.92); padding: 10px 14px; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.5); min-width: 240px; max-width: 433px; font-size: 13px; line-height: 1.5; }
   #ui h3 { margin: 0 0 8px 0; font-size: 13px; font-weight: 600; color: #9fc; letter-spacing: 0.04em; text-transform: uppercase; }
   #ui label { display: block; cursor: pointer; padding: 2px 0; }
   #ui input[type=checkbox] { vertical-align: middle; margin-right: 6px; }
@@ -538,19 +538,6 @@ document.querySelectorAll('input[name=basemap]').forEach(el => {
       if (window.__updateLineThickness) window.__updateLineThickness();
     }
   });
-});
-
-// Dev helper: orbit/zoom/pan to the view you want, then press "p" to print the
-// current camera + target as two lines you can paste into the initial-view block
-// (the `if (initial === 'none')` branch) to make it the default opening view.
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'p' || e.key === 'P') {
-    const c = camera.position, t = controls.target;
-    console.log(
-      `controls.target.set(${t.x.toFixed(1)}, ${t.y.toFixed(1)}, ${t.z.toFixed(1)});\n` +
-      `camera.position.set(${c.x.toFixed(1)}, ${c.y.toFixed(1)}, ${c.z.toFixed(1)});`
-    );
-  }
 });
 
 // Collapsible panel toggles (clicking anywhere on the header collapses/expands).
