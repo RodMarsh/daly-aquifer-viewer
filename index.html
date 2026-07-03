@@ -460,13 +460,15 @@ async function main() {
     // Oblique 3D framing. In plan the aquifer is ~square (≈300 km each way)
     // but it is effectively a thin sheet, so view it as a broad horizontal
     // band: look along the E–W axis (x-dominant) so the N–S axis runs
-    // left–right across the screen, tilted down ~25° to reveal depth relief.
-    // Target the vertical centre of the (vex-scaled) Tindall surface — it sits
-    // well below y=0 because the formation is mostly at negative elevation, so
-    // aiming at y=0 would leave the band low and clipped.
+    // left–right across the screen, tilted down ~28° so the depth relief and
+    // the deep basins read clearly. Target the vertical centre of the
+    // (vex-scaled) Tindall surface — it sits well below y=0 because the
+    // formation is mostly at negative elevation, so aiming at y=0 would leave
+    // the band low and clipped. The equal −z offset on target and camera pans
+    // the whole framing sideways so the band centres clear of the panels.
     const yc = ((zmin + zmax) / 2) / 1000 * vex;
-    controls.target.set(0, yc, diag * 0.06);
-    camera.position.set(diag * 0.74, yc + diag * 0.34, diag * 0.18);
+    controls.target.set(0, yc, diag * -0.16);
+    camera.position.set(diag * 0.80, yc + diag * 0.44, diag * -0.16);
   } else {
     // Tiny z (south) offset avoids OrbitControls gimbal-lock at exact top-down,
     // and orients the camera so screen-up aligns with world -Z (= north).
