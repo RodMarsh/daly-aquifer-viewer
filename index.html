@@ -457,18 +457,16 @@ async function main() {
   //  basemap off -> oblique view so the 3D Tindall depth is visible
   const initial = document.querySelector('input[name=basemap]:checked').value;
   if (initial === 'none') {
-    // Oblique 3D framing. In plan the aquifer is ~square (≈300 km each way)
-    // but it is effectively a thin sheet, so view it as a broad horizontal
-    // band: look along the E–W axis (x-dominant) so the N–S axis runs
-    // left–right across the screen, tilted down ~28° so the depth relief and
-    // the deep basins read clearly. Target the vertical centre of the
-    // (vex-scaled) Tindall surface — it sits well below y=0 because the
-    // formation is mostly at negative elevation, so aiming at y=0 would leave
-    // the band low and clipped. The equal −z offset on target and camera pans
-    // the whole framing sideways so the band centres clear of the panels.
+    // Oblique 3D opening view (framed by hand and captured). The aquifer is a
+    // thin sheet, so this looks across it at ~39° elevation to reveal the depth
+    // relief and deep basins, with the N–S extent running roughly left–right.
+    // Target the vertical centre of the (vex-scaled) Tindall surface — it sits
+    // well below y=0 because the formation is mostly at negative elevation, so
+    // aiming at y=0 would leave the band low and clipped. Positions are kept
+    // relative to the model diagonal so the framing survives data changes.
     const yc = ((zmin + zmax) / 2) / 1000 * vex;
-    controls.target.set(0, yc, diag * -0.16);
-    camera.position.set(diag * 0.80, yc + diag * 0.44, diag * -0.16);
+    controls.target.set(0, yc, diag * -0.160);
+    camera.position.set(diag * -0.274, yc + diag * 0.517, diag * 0.541);
   } else {
     // Tiny z (south) offset avoids OrbitControls gimbal-lock at exact top-down,
     // and orients the camera so screen-up aligns with world -Z (= north).
@@ -540,6 +538,19 @@ document.querySelectorAll('input[name=basemap]').forEach(el => {
       if (window.__updateLineThickness) window.__updateLineThickness();
     }
   });
+});
+
+// Dev helper: orbit/zoom/pan to the view you want, then press "p" to print the
+// current camera + target as two lines you can paste into the initial-view block
+// (the `if (initial === 'none')` branch) to make it the default opening view.
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'p' || e.key === 'P') {
+    const c = camera.position, t = controls.target;
+    console.log(
+      `controls.target.set(${t.x.toFixed(1)}, ${t.y.toFixed(1)}, ${t.z.toFixed(1)});\n` +
+      `camera.position.set(${c.x.toFixed(1)}, ${c.y.toFixed(1)}, ${c.z.toFixed(1)});`
+    );
+  }
 });
 
 // Collapsible panel toggles (clicking anywhere on the header collapses/expands).
